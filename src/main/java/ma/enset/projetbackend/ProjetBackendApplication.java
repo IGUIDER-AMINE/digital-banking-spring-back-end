@@ -9,6 +9,7 @@ import ma.enset.projetbackend.enums.OperationType;
 import ma.enset.projetbackend.repositories.AccountOperationRepository;
 import ma.enset.projetbackend.repositories.BankAccountRepository;
 import ma.enset.projetbackend.repositories.CustomerRepository;
+import ma.enset.projetbackend.services.BankService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +27,15 @@ public class ProjetBackendApplication {
         SpringApplication.run(ProjetBackendApplication.class, args);
     }
 
+
+
     @Bean
+    CommandLineRunner commandLineRunner(BankService bankService){
+        return args -> {
+            bankService.consulter();
+        };
+    }
+    //@Bean
     CommandLineRunner commandLineRunner(
             CustomerRepository customerRepository,
             BankAccountRepository bankAccountRepository,
