@@ -174,6 +174,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public void deleteCustomer(Long customerId){
+
         customerRepository.deleteById(customerId);
     }
 
@@ -199,4 +200,10 @@ public class BankAccountServiceImpl implements BankAccountService {
         return accountHistoryDTO;
     }
 
+    @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        List<Customer> customers=customerRepository.searchCustomer(keyword);
+        List<CustomerDTO> customerDTOS = customers.stream().map(cust -> dtoMapper.fromCustomer(cust)).collect(Collectors.toList());
+        return customerDTOS;
+    }
 }
